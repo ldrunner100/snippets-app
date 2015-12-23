@@ -36,3 +36,11 @@ INFO:root:Constructing parser
 DEBUG:root:Constructing put subparser
 INFO:root:Constructing parser
 DEBUG:root:Constructing put subparser
+INFO:root:Constructing parser
+DEBUG:root:Constructing put subparser
+INFO:root:Constructing parser
+DEBUG:root:Constructing put subparser
+INFO:root:Constructing parser
+DEBUG:root:Constructing put subparser
+DEBUG:root:Connecting to PostgreSQL
+ERROR:root:FIXME: Unimplemented - put('Test', 'This is a test snippet')
