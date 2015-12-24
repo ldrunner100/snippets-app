@@ -53,15 +53,22 @@ def put(name, snippet):
     return name, snippet
     
 
-def get(name):
-    """Retrieve the snippet with a given name.
+def get(keyword):
+    """
+    
+    Retrieve the snippet with a given name.
     
     If there is no such snippet return "no such snippet"
     
     Returns the snippet.
     """
-    logging.error("FIXME: Unimplemented - get({!r})".format(name))
-    return name
+    logging.error("FIXME: Unimplemented - get({!r}, {!r})".format(keyword, message))
+    logging.info("Retrieving snippet {!r: {!r}".format(keyword, message))
+    cursor = connection.cursor()
+    command = "select keyword, message from snippets where keyword=(%s);"
+    cursor.fetchone(command, (keyword))
+    logging.debug("Message retrieved successfully.")
+    return keyword, message
         
     
 if __name__ == "__main__":
