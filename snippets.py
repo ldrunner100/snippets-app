@@ -38,7 +38,13 @@ def main():
         
 def put(name, snippet):
     """
+<<<<<<< HEAD
     Store a snippet with an associated name.
+=======
+
+    Store a snippet with an associated name.
+
+>>>>>>> 5371c63ed048dbbf3801d394eb201e0905f6bcf2
     Returns the name and the snippet
     """
     logging.error("FIXME: Unimplemented - put({!r}, {!r})".format(name, snippet))
@@ -70,4 +76,13 @@ def get(keyword):
         
     
 if __name__ == "__main__":
+<<<<<<< HEAD
     main()
+=======
+    main()
+
+
+    
+
+    
+>>>>>>> 5371c63ed048dbbf3801d394eb201e0905f6bcf2
