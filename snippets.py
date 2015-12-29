@@ -66,23 +66,21 @@ def get(keyword):
     
     Returns the snippet.
     """
-    logging.error("FIXME: Unimplemented - get({!r}, {!r})".format(keyword, message))
-    logging.info("Retrieving snippet {!r: {!r}".format(keyword, message))
-    cursor = connection.cursor()
-    command = "select keyword, message from snippets where keyword=(%s);"
-    cursor.fetchone(command, (keyword))
-    logging.debug("Message retrieved successfully.")
-    return keyword, message
+    try:
+        command = "insert into snippets values (%s, %s)"
+        cursor.execute(command, (name, snippet))
+    except psycopg2.IntegrityError as e:
+        connection.rollback()
+        command = "update snippets set message=%s where keyword=%s"
+        cursor.execute(command, (snippet, name))
+    return row
         
     
 if __name__ == "__main__":
-<<<<<<< HEAD
-    main()
-=======
     main()
 
 
     
 
     
->>>>>>> 5371c63ed048dbbf3801d394eb201e0905f6bcf2
+
