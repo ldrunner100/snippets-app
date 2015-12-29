@@ -5,7 +5,8 @@ import psycopg2
 
 #set the log output file, and the log level
 logging.basicConfig(filename="snippets.log", level=logging.DEBUG)
-
+logging.debug("Connecting to PostgreSQL")
+connection = psycopg2.connect(database="snippets")
 
 def main():
     """Main function"""
@@ -37,18 +38,8 @@ def main():
         print("Retrieved snippet: {!r}".format(snippet))
         
 def put(name, snippet):
-    """
-<<<<<<< HEAD
-    Store a snippet with an associated name.
-=======
-
-    Store a snippet with an associated name.
-
->>>>>>> 5371c63ed048dbbf3801d394eb201e0905f6bcf2
-    Returns the name and the snippet
-    """
-    logging.error("FIXME: Unimplemented - put({!r}, {!r})".format(name, snippet))
-    logging.info("Storing snippet {!r: {!r}".format(name, snippet))
+    """Store a snippet with an associated name."""
+    logging.info("Storing snippet {!r}: {!r}".format(name, snippet))
     cursor = connection.cursor()
     command = "insert into snippets values (%s, %s)"
     cursor.execute(command, (name, snippet))
@@ -66,14 +57,14 @@ def get(keyword):
     
     Returns the snippet.
     """
-    try:
-        command = "insert into snippets values (%s, %s)"
-        cursor.execute(command, (name, snippet))
-    except psycopg2.IntegrityError as e:
-        connection.rollback()
-        command = "update snippets set message=%s where keyword=%s"
-        cursor.execute(command, (snippet, name))
-    return row
+    cursor = connection.cursor()
+    command = ("select keyword, message from snippets where keyword='(%s)';")
+    row = cursor.fetchone()
+    cursor.execute(command, (keyword))
+    connection.commit()
+    logging.error("no row matching the criteria")
+    logging.debug("row retrieved successfully")
+    return row[0]
         
     
 if __name__ == "__main__":
