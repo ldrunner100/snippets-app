@@ -23,6 +23,7 @@ def main():
     put_parser.add_argument("name", help="The name of the snippet")
     put_parser.add_argument("snippet", help="The snippet text")
     get_parser = subparsers.add_parser("get")
+    get_parser.add_argument("keyword", help="the keyword of the row")
     
     
     arguments = parser.parse_args(sys.argv[1:])
