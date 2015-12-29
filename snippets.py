@@ -60,8 +60,8 @@ def get(keyword):
     """
     cursor = connection.cursor()
     command = ("select keyword, message from snippets where keyword='(%s)';")
+    cursor.execute(command, (keyword,))
     row = cursor.fetchone()
-    cursor.execute(command, (keyword))
     connection.commit()
     logging.error("no row matching the criteria")
     logging.debug("row retrieved successfully")
